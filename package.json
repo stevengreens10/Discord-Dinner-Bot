@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/stevengreens10/Discord-Dinner-Bot/issues"
   },
-  "homepage": "https://github.com/stevengreens10/Discord-Dinner-Bot#readme"
+  "homepage": "https://github.com/stevengreens10/Discord-Dinner-Bot#readme",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "discord.js-commando": "^0.10.0"
+  }
 }

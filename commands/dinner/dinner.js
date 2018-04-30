@@ -44,13 +44,14 @@ class DinnerCommand extends commando.Command {
             dinnerLocation = weekend_options[pick][pick2]
         }
         
-		//message.channel.send(":game_die: @everyone, the dinner location for tonight is: " + dinnerLocation + "!");
-		return dinnerLocation;
+		message.channel.send(":game_die: @everyone, the dinner location for tonight is: " + dinnerLocation + "!");
+		return null;
 	}
     
-    function randint(min, max) {
-        return Math.floor(Math.random() * ((max + 1) - min)) + min
-    }
+}
+
+function randint(min, max) {
+    return Math.floor(Math.random() * ((max + 1) - min)) + min
 }
 
 module.exports = DinnerCommand;
