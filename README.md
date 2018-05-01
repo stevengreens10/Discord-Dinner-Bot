@@ -3,7 +3,7 @@ Discord bot written in NodeJS that can choose the location to eat dinner for the
 
 ## Setup
 - Clone this repository and run `npm install` in the directory to install the necessary dependencies.
-- Now edit `config.js` and change the TOKEN to your bot's token (found in the applications section on the discord website)
+- Now copy `config.example.js` to `config.js` and change the TOKEN to your bot's token (found in the applications section on the discord website)
 - All that's left is to run the bot using Node: `node index.js`.
 
 ## Commands
