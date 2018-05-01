@@ -40,18 +40,21 @@ module.exports = {
                 data.roll.last = today.toDateString();
                 data.roll.by = user;
                 this.saveDinnerData(data);
-                return true;
+
+                let location = this.chooseDinnerLocation();
+                this.setCurrentLocation(location);
+
+                return location;
             }
 
         } catch (err) {
-            return false;
+            return null;
         }
 
-        return false;
+        return null;
     },
 
     reroll: function(user) {
-
         let today = new Date();
         // Only concerned with day month year, not time
         today.setHours(0); today.setMinutes(0); today.setSeconds(0); today.setMilliseconds(0);
@@ -71,12 +74,16 @@ module.exports = {
                         rerollData[i] = userData;
                         data.reroll = rerollData;
                         this.saveDinnerData(data);
-                        return true;
+
+                        let location = this.chooseDinnerLocation();
+                        this.setCurrentLocation(location);
+
+                        return location;
                     } else {
-                        return false;
+                        return null;
                     }
                 } catch(err) {
-                    return false;
+                    return null;
                 }
             }
         }
@@ -90,7 +97,11 @@ module.exports = {
         rerollData.push(userData);
         data.reroll = rerollData;
         this.saveDinnerData(data);
-        return true;
+
+        let location = this.chooseDinnerLocation();
+        this.setCurrentLocation(location);
+
+        return location;
     },
 
     loadDinnerData: function() {
@@ -105,7 +116,7 @@ module.exports = {
         fs.writeFile(dataFile, dataStr, 'utf8', null);
     },
 
-    getDinnerLocation: function() {
+    chooseDinnerLocation: function() {
         let date = new Date();
 
         let day = date.getDay();
@@ -125,6 +136,38 @@ module.exports = {
         }
 
         return dinnerLocation;
+    },
+
+    getCurrentLocation: function() {
+        if(lastRollToday) {
+            let data = this.loadDinnerData();
+            return data.roll.location;
+        }
+
+        return null;
+    },
+
+    setCurrentLocation: function(location) {
+        let data = this.loadDinnerData();
+        data.roll.location = location;
+        this.saveDinnerData(data);
+    },
+
+    lastRollToday: function() {
+        let data = this.loadDinnerData();
+
+        try {
+            let lastRollDate = new Date(data.roll.last);
+            let today = new Date();
+            // Only concerned with day month year, not time
+            today.setHours(0);
+            today.setMinutes(0);
+            today.setSeconds(0);
+            today.setMilliseconds(0);
+            return lastRollDate === today;
+        } catch(err) {
+            return false;
+        }
     }
 
 };

@@ -13,11 +13,12 @@ class DinnerCommand extends commando.Command {
 
 	async run(message, args) {
         let username = message.member.user.id;
-        if(dinnerutil.roll(username)) {
-            let dinnerLocation = dinnerutil.getDinnerLocation();
-            message.channel.send(":game_die: @everyone, the dinner location for tonight is: " + dinnerLocation + "!");
+        let location = dinnerutil.roll(username);
+        if(location) {
+            message.channel.send(":game_die: @everyone, the dinner location for tonight is: " + location + "!");
         } else {
-            message.channel.send("Sorry, <@" + username + ">. The dinner location for tonight has already been chosen.\nTry rerolling instead?");
+            message.channel.send("Sorry, <@" + username + ">. The dinner location for tonight has already been chosen. " +
+                "(" + dinnerutil.getCurrentLocation() + ")");
         }
 		return null;
 	}
