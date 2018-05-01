@@ -39,15 +39,17 @@ module.exports = {
             if(lastRollDate < today) {
                 data.roll.last = today.toDateString();
                 data.roll.by = user;
-                this.saveDinnerData(data);
 
                 let location = this.chooseDinnerLocation();
-                this.setCurrentLocation(location);
+                data.roll.location = location;
+
+                this.saveDinnerData(data);
 
                 return location;
             }
 
         } catch (err) {
+            console.log(err);
             return null;
         }
 
@@ -73,16 +75,17 @@ module.exports = {
                         userData.last = today.toDateString();
                         rerollData[i] = userData;
                         data.reroll = rerollData;
-                        this.saveDinnerData(data);
 
                         let location = this.chooseDinnerLocation();
-                        this.setCurrentLocation(location);
+                        data.roll.location = location;
+                        this.saveDinnerData(data);
 
                         return location;
                     } else {
                         return null;
                     }
                 } catch(err) {
+                    console.log(err);
                     return null;
                 }
             }
@@ -96,10 +99,10 @@ module.exports = {
         };
         rerollData.push(userData);
         data.reroll = rerollData;
-        this.saveDinnerData(data);
 
         let location = this.chooseDinnerLocation();
-        this.setCurrentLocation(location);
+        data.roll.location = location;
+        this.saveDinnerData(data);
 
         return location;
     },
@@ -143,14 +146,7 @@ module.exports = {
             let data = this.loadDinnerData();
             return data.roll.location;
         }
-
         return null;
-    },
-
-    setCurrentLocation: function(location) {
-        let data = this.loadDinnerData();
-        data.roll.location = location;
-        this.saveDinnerData(data);
     },
 
     lastRollToday: function() {
@@ -164,8 +160,9 @@ module.exports = {
             today.setMinutes(0);
             today.setSeconds(0);
             today.setMilliseconds(0);
-            return lastRollDate === today;
+            return today.toDateString() === lastRollDate.toDateString()
         } catch(err) {
+            console.log(err);
             return false;
         }
     }

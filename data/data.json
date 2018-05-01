@@ -1,12 +1,17 @@
 {
     "roll": {
-        "last": "Mon Apr 30 2018",
-        "by": "273107444505509888"
+        "last": "Tue May 01 2018",
+        "by": "273107444505509888",
+        "location": "Fountain"
     },
     "reroll": [
         {
+            "name": "273107444505509888",
+            "last": "Tue May 01 2018"
+        },
+        {
             "name": "259425572852072450",
-            "last": "Mon Apr 30 2018"
+            "last": "Tue May 01 2018"
         }
     ]
 }
