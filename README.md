@@ -1,10 +1,10 @@
 # Discord-Dinner-Bot
-Discord bot that to choose the location to eat dinner for the night. Any user on the server may choose to reroll the choice, but they may only do this once a week.
+Discord bot written in NodeJS that can choose the location to eat dinner for the night. Any user on the server may choose to reroll the choice, but they may only do this once a week.
 
 ## Setup
 - Clone this repository and run `npm install` in the directory to install the necessary dependencies.
 - Now edit `config.js` and change the TOKEN to your bot's token (found in the applications section on the discord website)
-- bAll that's left is to run the bot with node: `node index.js`.
+- All that's left is to run the bot using Node: `node index.js`.
 
 ## Commands
 `!dinner` - This is the main command to choose the dinner location. It can be executed once per day on the server.
