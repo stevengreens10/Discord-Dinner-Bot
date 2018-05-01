@@ -1,16 +1,5 @@
 const commando = require('discord.js-commando');
-
-const weekday_options = [
-    ["Talley","Atrium"],["Fountain","Clark"]
-]
-
-const friday_options =[
-    "Zaxby's","Penn Station","Arby's","Wendy's","Taco Bell","!Wildcard! - Choose a new place", "Waffle House", "Dp-dough"
-]
-
-const weekend_options =[
-    ["Talley"], ["Fountain", "Clark"], friday_options
-]
+const dinnerutil = require('../../util/dinnerutil.js');
 
 class DinnerCommand extends commando.Command {
 	constructor(client) {
@@ -23,35 +12,16 @@ class DinnerCommand extends commando.Command {
 	}
 
 	async run(message, args) {
-        // Splits by space for possible arguments
-		let splitMessage = (message.content).split(' ');
-
-        var date = new Date();
-        
-        var day = date.getDay();
-        
-        let dinnerLocation="STARVE."
-        if (day<=3 || day==6) {
-            let pick = randint(0, weekday_options.length - 1)
-            let pick2 = randint(0, weekday_options[pick].length - 1)
-            dinnerLocation = weekday_options[pick][pick2]
-        } else if(day==4) {
-            let pick = randint(0, friday_options.length - 1)
-            dinnerLocation = friday_options[pick]
+        let username = message.member.user.id;
+        if(dinnerutil.roll(username)) {
+            let dinnerLocation = dinnerutil.getDinnerLocation();
+            message.channel.send(":game_die: @everyone, the dinner location for tonight is: " + dinnerLocation + "!");
         } else {
-            let pick = randint(0, weekend_options.length - 1)
-            let pick2 = randint(0, weekend_options[pick].length - 1)
-            dinnerLocation = weekend_options[pick][pick2]
+            message.channel.send("Sorry, <@" + username + ">. The dinner location for tonight has already been chosen.\nTry rerolling instead?");
         }
-        
-		message.channel.send(":game_die: @everyone, the dinner location for tonight is: " + dinnerLocation + "!");
 		return null;
 	}
     
-}
-
-function randint(min, max) {
-    return Math.floor(Math.random() * ((max + 1) - min)) + min
 }
 
 module.exports = DinnerCommand;
