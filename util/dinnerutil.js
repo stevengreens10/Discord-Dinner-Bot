@@ -139,7 +139,7 @@ module.exports = {
     },
 
     getCurrentLocation: function() {
-        if(lastRollToday) {
+        if(this.lastRollToday()) {
             let data = this.loadDinnerData();
             return data.roll.location;
         }
