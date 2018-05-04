@@ -58,7 +58,6 @@ module.exports = {
     reroll: function(user) {
         let today = new Date();
         // Only concerned with day month year, not time
-        today.setHours(0); today.setMinutes(0); today.setSeconds(0); today.setMilliseconds(0);
 
         let data = this.loadDinnerData();
         let rerollData = data.reroll;
@@ -153,13 +152,8 @@ module.exports = {
 
         try {
             let lastRollDate = new Date(data.roll.last);
-            let today = new Date(getLocalizedDateString(new Date()));
             // Only concerned with day month year, not time
-            today.setHours(0);
-            today.setMinutes(0);
-            today.setSeconds(0);
-            today.setMilliseconds(0);
-            return getLocalizedDateString(today) === getLocalizedDateString(lastRollDate)
+            return getLocalizedDateString(new Date()) === getLocalizedDateString(lastRollDate)
         } catch(err) {
             console.log(err);
             return false;
