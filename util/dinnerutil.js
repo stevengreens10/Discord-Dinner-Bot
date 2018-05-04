@@ -126,7 +126,7 @@ module.exports = {
     chooseDinnerLocation: function() {
         let date = new Date();
 
-        let day = date.getDay();
+        let day = new Date(getLocalizedDateString(date)).getDay();
 
         let dinnerLocation="STARVE.";
         if (day >= 1 && day <= 4) {
