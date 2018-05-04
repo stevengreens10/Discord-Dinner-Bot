@@ -35,13 +35,8 @@ module.exports = {
         let data = this.loadDinnerData();
 
         try {
-            let lastRollDate = new Date(data.roll.last);
-            let today = new Date();
-            // Only concerned with day month year, not time
-            today.setHours(0); today.setMinutes(0); today.setSeconds(0); today.setMilliseconds(0);
-
-            if(lastRollDate < today) {
-                data.roll.last = getLocalizedDateString(today);
+            if(!this.lastRollToday()) {
+                data.roll.last = getLocalizedDateString(new Date());
                 data.roll.by = user;
 
                 let location = this.chooseDinnerLocation();
