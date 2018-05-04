@@ -125,11 +125,11 @@ module.exports = {
         let day = date.getDay();
 
         let dinnerLocation="STARVE.";
-        if (day<=3 || day===6) {
+        if (day >= 1 && day <= 4) {
             let pick = randint(0, weekday_options.length - 1);
             let pick2 = randint(0, weekday_options[pick].length - 1);
             dinnerLocation = weekday_options[pick][pick2]
-        } else if(day===4) {
+        } else if(day === 5) {
             let pick = randint(0, friday_options.length - 1);
             dinnerLocation = friday_options[pick]
         } else {
