@@ -25,6 +25,10 @@ function randint(min, max) {
     return Math.floor(Math.random() * ((max + 1) - min)) + min
 }
 
+function getLocalizedDateString(date) {
+    return date.toLocaleString("en-US", {timeZone: "America/New_York"}).split(",")[0];
+}
+
 module.exports = {
 
     roll: function(user) {
@@ -37,7 +41,7 @@ module.exports = {
             today.setHours(0); today.setMinutes(0); today.setSeconds(0); today.setMilliseconds(0);
 
             if(lastRollDate < today) {
-                data.roll.last = today.toDateString();
+                data.roll.last = getLocalizedDateString(today);
                 data.roll.by = user;
 
                 let location = this.chooseDinnerLocation();
@@ -72,7 +76,7 @@ module.exports = {
                 try {
                     let lastReroll = new Date(userData.last);
                     if(datediff(lastReroll, today) >= 7) {
-                        userData.last = today.toDateString();
+                        userData.last = getLocalizedDateString(today);
                         rerollData[i] = userData;
                         data.reroll = rerollData;
 
@@ -95,7 +99,7 @@ module.exports = {
         // Can reroll and is then inserted
         let userData = {
             name: user.toLowerCase(),
-            last: today.toDateString()
+            last: getLocalizedDateString(today)
         };
         rerollData.push(userData);
         data.reroll = rerollData;
@@ -160,7 +164,7 @@ module.exports = {
             today.setMinutes(0);
             today.setSeconds(0);
             today.setMilliseconds(0);
-            return today.toDateString() === lastRollDate.toDateString()
+            return getLocalizedDateString(today) === getLocalizedDateString(lastRollDate)
         } catch(err) {
             console.log(err);
             return false;
