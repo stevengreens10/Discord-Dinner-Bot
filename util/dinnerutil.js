@@ -11,7 +11,7 @@ const friday_options =[
 ];
 
 const weekend_options =[
-    ["Talley"], ["Fountain", "Clark"], friday_options
+    ["Talley"], ["Fountain", "Clark"]
 ];
 
 
