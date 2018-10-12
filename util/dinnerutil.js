@@ -106,7 +106,20 @@ module.exports = {
     },
 
     loadDinnerData: function() {
-        // Get content from file
+        if(!fs.existsSync(dataFile)) {
+	    data = {
+		"roll": {
+		    "last": "",
+		    "by": "",
+		    "location": ""
+		},
+		"reroll": []
+	    };
+	    this.saveDinnerData(data);
+	    return data;
+	}
+
+	// Get content from file
         let contents = fs.readFileSync(dataFile);
         // Define to JSON type
         return JSON.parse(contents);
