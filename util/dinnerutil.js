@@ -153,7 +153,7 @@ module.exports = {
         try {
             let lastRollDate = new Date(data.roll.last);
             // Only concerned with day month year, not time
-            return getLocalizedDateString(new Date()) === getLocalizedDateString(lastRollDate)
+            return getLocalizedDateString(new Date()) == data.roll.last
         } catch(err) {
             console.log(err);
             return false;
