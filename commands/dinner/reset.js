@@ -5,7 +5,7 @@ class ResetCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'reset',
-			group: 'reset',
+			group: 'dinner',
 			memberName: 'reset',
 			description: 'Resets dinner stats'
 		});
