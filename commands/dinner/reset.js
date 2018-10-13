@@ -22,4 +22,4 @@ class ResetCommand extends commando.Command {
     
 }
 
-module.exports = DinnerCommand;
+module.exports = ResetCommand;
