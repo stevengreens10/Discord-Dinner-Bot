@@ -128,7 +128,7 @@ module.exports = {
 	    };
 	    this.saveDinnerData(data);
         return data;
-    }
+    },
 
     saveDinnerData: function(data) {
         let dataStr = JSON.stringify(data, null, 4);
