@@ -107,15 +107,7 @@ module.exports = {
 
     loadDinnerData: function() {
         if(!fs.existsSync(dataFile)) {
-	    data = {
-		"roll": {
-		    "last": "",
-		    "by": "",
-		    "location": ""
-		},
-		"reroll": []
-	    };
-	    this.saveDinnerData(data);
+	    data = this.resetData()
 	    return data;
 	}
 
@@ -124,6 +116,19 @@ module.exports = {
         // Define to JSON type
         return JSON.parse(contents);
     },
+    
+    resetData: function() {
+        data = {
+		  "roll": {
+		    "last": "",
+		    "by": "",
+		    "location": ""
+		  },
+		  "reroll": []
+	    };
+	    this.saveDinnerData(data);
+        return data;
+    }
 
     saveDinnerData: function(data) {
         let dataStr = JSON.stringify(data, null, 4);
